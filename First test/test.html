@@ -1,0 +1,94 @@
+<html>
+
+<head>
+    <style type="text/css">
+        .col-main {
+            border-right: 2px black solid;
+            flex: 4;
+            padding: 10px;
+        }
+
+        .col-image {
+            flex: 1;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .row {
+            display: flex;
+            flex-direction: row;
+            border: 2px black solid;
+        }
+        .table-image {
+            width: 83px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="max-width: 900px"> 
+    <h2>Init variant</h2>
+    <table>
+        <tr class="aoctable-row">
+            <td>
+                <br />
+                <strong>Worldwide INCLUDING USA, Canada and Caribbean</strong>
+                <br />
+                <p>Caribbean: Anguilla, Antigua, Aruba, Bahamas, Barbados, Belize, Bermuda, Bonaire, Cayman Islands,
+                    Costa Rica, Cuba, Curacao, Dominica, Dominican Republic, El Salvador, Grenada, Guadeloupe,
+                    Guatemala, Haiti, Honduras, Jamaica, Martinique, Mexico, Nicaragua, Panama, Puerto Rico, St. Kitts,
+                    St. Lucia, St. Vincent, Trinidad and Tobago, and the Virgin Islands.</p>
+            </td>
+            <td style="text-align: center;">
+                Area I
+                <div style="margin: 0 auto; width: 83px; vertical-align: middle;">
+                    <img src="{!$Resource.MEGLC_AOC_Image}" alt="me" style="width: 83px" />
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <h2>Table variant</h2>
+    <table border="1">
+        <tr class="aoctable-row">
+            <td>            
+                <strong>Worldwide INCLUDING USA, Canada and Caribbean</strong>                
+                <p>Caribbean: Anguilla, Antigua, Aruba, Bahamas, Barbados, Belize, Bermuda, Bonaire, Cayman Islands,
+                    Costa Rica, Cuba, Curacao, Dominica, Dominican Republic, El Salvador, Grenada, Guadeloupe,
+                    Guatemala, Haiti, Honduras, Jamaica, Martinique, Mexico, Nicaragua, Panama, Puerto Rico, St. Kitts,
+                    St. Lucia, St. Vincent, Trinidad and Tobago, and the Virgin Islands.</p>
+            </td>
+            <td style="text-align: center; padding: 5px" width="120">
+                Area I
+                <div style="margin: 0 auto; width: 83px; vertical-align: middle;">
+                    <img src="https://cdn3.vectorstock.com/i/1000x1000/38/37/earth-icon-pictograph-of-globe-globe-icon-vector-14873837.jpg" alt="me" class="table-image"/>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <h2>Flex variant</h2>
+    <div>
+        <div class="row">
+            <div class="col-main">
+                <strong>Worldwide INCLUDING USA, Canada and Caribbean</strong>
+                <p>Caribbean: Anguilla, Antigua, Aruba, Bahamas, Barbados, Belize, Bermuda, Bonaire, Cayman Islands,
+                    Costa Rica, Cuba, Curacao, Dominica, Dominican Republic, El Salvador, Grenada, Guadeloupe,
+                    Guatemala, Haiti, Honduras, Jamaica, Martinique, Mexico, Nicaragua, Panama, Puerto Rico, St. Kitts,
+                    St. Lucia, St. Vincent, Trinidad and Tobago, and the Virgin Islands.</p>
+            </div>
+            <div class="col-image">
+                Area I
+                <br />
+                <img src="https://cdn3.vectorstock.com/i/1000x1000/38/37/earth-icon-pictograph-of-globe-globe-icon-vector-14873837.jpg" alt="me" class="table-image" />
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>
