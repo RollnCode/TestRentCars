@@ -1,0 +1,229 @@
+<apex:page controller="ChooseCarController" docType="html-5.0" sidebar="false" showHeader="false" standardStylesheets="false">
+     <apex:stylesheet value="{!URLFOR($Resource.Style, 'style.css')}"/>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Roboto');
+        body {
+        background: url(image.png);
+        background-blend-mode: multiply, normal;
+        font-family: 'Roboto', sans-serif;
+        color:#445A7D;
+        }
+        
+        .listWrap {
+        background-color: #EFEFEF;
+        max-width: 900px;
+        margin: auto;
+        height: 100%;
+        padding: 10px;
+        }
+        
+        .listCardItem {
+        background: #FFFFFF;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+        border-radius: 4px;
+        width: 676px;
+        margin: 8px 16px;
+        display: flex;
+        flex-direction: row;
+        
+        }
+        
+        .listImage {
+        flex: 2;
+        border-top-left-radius: 4px;
+        border-bottom-left-radius: 4px;
+        max-width: 300px;
+        object-fit: scale-down;
+        }
+        
+        .listItemContent {
+        flex: 3;
+        padding: 25px 30px;
+        }
+        
+        .itemTitle {
+        font-family: inherit;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 24px;
+        line-height: 100%;
+        color:#445A7D;
+        text-transform: uppercase;
+        margin-bottom: 12px;
+        }
+        
+        .itemValue {
+        font-family: inherit;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 225%;
+        color:#445A7D;
+        }
+        
+        .td {
+        
+        }
+        
+        .itemTable {
+        width: 100%;
+        }
+        
+        .confirmButton[type="submit"] {
+        display: block !important;
+        background: #6DDD54;
+        border-radius: 3px;
+        color: white;
+        text-align: center;
+        padding: 12px;
+        cursor: pointer;
+        width:100%;
+        }
+        
+        .confirmButton:hover[type="submit"] {
+        background: rgb(82, 155, 65);
+        }
+        
+        .choose-car {
+        display:flex;
+        width: 100%;
+        margin: 0px auto;
+        font-size: 16px;
+        }
+        .choose-car > .cell {
+        flex: 1;
+        vertical-align: text-top;
+        
+        }
+        
+        .itemHeader {
+        width:100%;
+        text-align: center;
+        font-family: inherit;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 24px;
+        line-height: 100%;
+        margin-top: 32px;
+        color:#445A7D;
+        text-transform: uppercase;
+        }
+        
+        .itemText {
+        font-family: inherit;
+        color:#445A7D;
+        }
+        
+        .report-signout {
+        font-family: inherit;
+        font-size: 16px !important;
+        color: #445A7D;
+        font-weight: normal;
+        right: 32px;
+        top: 12px;
+        background: transparent !important;
+        border-color: transparent !important;
+        position:absolute;
+        text-decoration: underline;
+        }
+        
+    </style>   
+    <apex:form id="form">
+        <apex:commandButton styleClass="report-signout" value="Signout" action="{!signout}"/>
+        <div class="choose-car">
+            <div class="cell">
+                <div class="itemHeader">Choose a car to rent</div>
+                <apex:repeat value="{!cars}" var="car">
+                    <div class="listCardItem">
+                        <apex:image styleClass="listImage" value="{!$Resource.CarItem}" />
+                        <div class="listItemContent">
+                            <table class="itemTable">
+                                <tr>
+                                    <td colspan="2">
+                                        <div class="itemTitle">{!car.Car_make__c} {!car.Car_Model__c}</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="itemText">Make: </span><span class="itemValue">{!car.Car_make__c}</span>
+                                    </td>
+                                    <td>
+                                        <span class="itemText">Private: </span><span class="itemValue">{!car.List_Price__c}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="itemText">Model: </span> <span class="itemValue">{!car.Car_Model__c}</span>
+                                    </td>
+                                    <td>
+                                        <span class="itemText">Currency: </span> <span class="itemValue">{!car.Currency__c}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="itemText">Engine: </span> <span class="itemValue">{!car.Engine__c}</span>
+                                    </td>
+                                    <td>
+                                        <span class="itemText">Colour: </span> <span class="itemValue">{!car.Colour__c}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <apex:commandButton styleClass="confirmButton" value="Rent" action="{!rent}" reRender="repeat" oncomplete="window.top.location.reload()">
+                                            <apex:param name="name" value="{!car.Id}" assignTo="{!id}"/>
+                                        </apex:commandButton> 
+                                    </td>
+                                </tr>
+                            </table>
+                            
+                        </div>
+                    </div>
+                </apex:repeat>
+            </div>
+            
+            <div class="cell">
+                <div class="itemHeader">Cars that you've rent</div>
+                <apex:repeat value="{!currentUserCars}" var="car">
+                    <div class="listCardItem">
+                        <apex:image styleClass="listImage" value="{!$Resource.CarItem}" />
+                        <div class="listItemContent">
+                            <table class="itemTable">
+                                <tr>
+                                    <td colspan="2">
+                                        <div class="itemTitle">{!car.Car_make__c} {!car.Car_Model__c}</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="itemText">Make: </span><span class="itemValue">{!car.Car_make__c}</span>
+                                    </td>
+                                    <td>
+                                        <span class="itemText">Price: </span><span class="itemValue">{!car.List_Price__c}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="itemText">Model: </span><span class="itemValue">{!car.Car_Model__c}</span>
+                                    </td>
+                                    <td>
+                                        <span class="itemText">Currency: </span><span class="itemValue">{!car.Currency__c}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="itemText">Engine: </span><span class="itemValue">{!car.Engine__c}</span>
+                                    </td>
+                                    <td>
+                                        <span class="itemText">Colour: </span><span class="itemValue">{!car.Colour__c}</span>
+                                    </td>
+                                </tr>         
+                            </table>
+                        </div>
+                    </div>
+                </apex:repeat>
+            </div>
+        </div>
+    </apex:form>
+    
+</apex:page>

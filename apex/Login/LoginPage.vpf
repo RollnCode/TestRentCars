@@ -1,0 +1,87 @@
+<apex:page controller="LoginController" docType="html-5.0" sidebar="false" showHeader="false" standardStylesheets="false">
+    <apex:stylesheet value="{!URLFOR($Resource.Style, 'style.css')}"/>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Roboto');
+        body {
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        font-family: 'Roboto', sans-serif;
+        }
+        
+        .login {
+        width: 300px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        padding:20px;
+        transform: translate(-50%, -50%);
+        font-size: 16px;
+        background: #fff;
+        border-radius: 4px;
+        }
+        
+        
+        .login-header {
+        display: block;
+        padding-bottom: 16px;
+        ont-style: normal;
+		font-weight: bold;
+		font-size: 24px;
+		line-height: 28px;
+		text-transform: capitalize;
+        color: #445A7D;
+        }
+        
+        /* Every row inside .login-container is defined with p tags */
+        .login p {
+        padding: 12px;
+        }
+        
+        .login input {
+        box-sizing: border-box;
+        display: block;
+        width: 100%;
+        border-width: 1px;
+        border-style: solid;
+        border-color: #E6E6E6;
+        border-radius: 2px;
+        padding: 16px;
+        margin-top: 5px;
+        font-family: inherit;
+        font-size: 0.95em;
+        background: #fff;
+        }
+        
+        .submit[type="submit"] {
+        width: 100%;
+		border-radius: 2px;
+        font-family: inherit;
+        font-size: 0.95em;
+        margin-top: 5px;
+        background: #6DDD54;
+        border-color: transparent;
+        color: #fff;
+        cursor: pointer;
+        }
+        
+        .submit[type="submit"]: hover {
+       	
+        }
+        
+        
+    </style>
+    
+    <apex:form styleClass="login" id="form">
+        <apex:outputLabel styleClass="login-header" value="Login"/>
+        <apex:input id="login" type="email" required="true"  value="{!login}" html-placeholder="E-Mail"/>
+        <apex:inputSecret id="password" required="true" value="{!password}" html-placeholder="Password"/>
+        <apex:commandButton styleClass="submit" value="Submit" action="{!submitLogin}" rerender="login, password"/> 
+    </apex:form>
+    
+    <script type="text/javascript">
+    document.getElementById('{!$Component.form.login}').focus();
+    </script>
+    
+</apex:page>
